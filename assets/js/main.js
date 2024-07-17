@@ -1,5 +1,37 @@
 "use strict";
 
+let autoplay = true;
+let slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+    autoplay = false;
+    showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+    autoplay = false;
+    showSlides(slideIndex = n);
+}
+
+function showSlides() {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1}
+    slides[slideIndex-1].style.display = "block";
+    if(autoplay == true){
+        setTimeout(showSlides, 5000); // Change image every 2 seconds
+    }
+}
+
+showSlides();
+
 
 jQuery(document).ready(function ($) {
 
@@ -76,10 +108,10 @@ jQuery(document).ready(function ($) {
 
     $('.test_slider').owlCarousel({
         responsiveClass: true,
-        autoplay: false,
+        autoplay: true,
         items: 1,
         loop: true,
-        dots: false,
+        dots: true,
         nav: false,
         navText: [
             "<i class='lnr lnr-chevron-left'></i>",
